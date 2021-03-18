@@ -15,7 +15,7 @@ class Viagem: NSObject {
     let caminhoDaImagem: String
     
     init(titulo: String, quantidadeDeDias: Int, preco: String, caminhoDaImagem: String) {
-        self.titulo = titulo
+        self.titulo = titulo.uppercased()
         self.quantidadeDeDias = quantidadeDeDias
         self.preco = preco
         self.caminhoDaImagem = caminhoDaImagem

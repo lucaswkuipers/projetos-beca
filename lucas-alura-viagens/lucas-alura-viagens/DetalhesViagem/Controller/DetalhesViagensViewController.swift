@@ -15,6 +15,8 @@ class DetalhesViagensViewController: UIViewController {
     @IBOutlet weak var labelDescricaoPacoteViagem: UILabel!
     @IBOutlet weak var labelDataViagem: UILabel!
     @IBOutlet weak var labelPrecoPacoteViagem: UILabel!
+    @IBOutlet weak var labelQuantidadeDias: UILabel!
+    
     
     @IBAction func botaoVoltar(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -31,6 +33,7 @@ class DetalhesViagensViewController: UIViewController {
             self.labelDescricaoPacoteViagem.text = pacote.descricao
             self.labelDataViagem.text = pacote.dataViagem
             self.labelPrecoPacoteViagem.text = pacote.viagem.preco
+            self.labelQuantidadeDias.text = "\(pacote.viagem.quantidadeDeDias) dias"
         }
 
     }
