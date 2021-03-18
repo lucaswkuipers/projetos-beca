@@ -8,40 +8,40 @@
 
 import UIKit
 
-class PacotesViagensViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
-
-    @IBOutlet weak var coloecaoPacotesViagem: UICollectionView!
-    @IBOutlet weak var pesquisarViagens: UISearchBar!
-    @IBOutlet weak var labelContadorPacotes: UILabel!
+class PacotesViagensViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UICollectionViewDelegate {
     
-    let listaComTodasViagens: [Viagem] = ViagemDAO().retornaTodasAsViagens()
-    var listaViagens: [Viagem] = []
+    @IBOutlet weak var colecaoPacotesViagem: UICollectionView!
+    @IBOutlet weak var pesquisarViagens: UISearchBar!
+    
+    @IBOutlet weak var labelContadorPacotes: UILabel!
+    let listaComTodosPacotes: [PacoteViagem] = PacoteViagemDAO().retornaTodasAsViagens()
+    var listaPacotes: [PacoteViagem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        listaViagens = listaComTodasViagens
+        listaPacotes = listaComTodosPacotes
         
-        coloecaoPacotesViagem.dataSource = self
-        coloecaoPacotesViagem.delegate = self
+        colecaoPacotesViagem.dataSource = self
+        colecaoPacotesViagem.delegate = self
         pesquisarViagens.delegate = self
         
         self.labelContadorPacotes.text = atualizaContadorLabel()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.listaViagens.count
+        return self.listaPacotes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let celulaPacote = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaPacote", for: indexPath) as! PacoteViagemCollectionViewCell
         
-        let viagemAtual = listaViagens[indexPath.item]
+        let pacoteAtual = listaPacotes[indexPath.item]
         
-        celulaPacote.labelTitulo.text  = viagemAtual.titulo
-        celulaPacote.labelQuantidadeDias.text = "\(viagemAtual.quantidadeDeDias) dias"
-        celulaPacote.labelPreco.text = "R$ \(viagemAtual.preco)"
-        celulaPacote.imagemViagem.image = UIImage(named: viagemAtual.caminhoDaImagem)
+        celulaPacote.labelTitulo.text  = pacoteAtual.viagem.titulo
+        celulaPacote.labelQuantidadeDias.text = "\(pacoteAtual.viagem.quantidadeDeDias) dias"
+        celulaPacote.labelPreco.text = "R$ \(pacoteAtual.viagem.preco)"
+        celulaPacote.imagemViagem.image = UIImage(named: pacoteAtual.viagem.caminhoDaImagem)
         
         celulaPacote.layer.borderWidth = 0.5
         celulaPacote.layer.borderColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
@@ -55,20 +55,26 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         return CGSize(width: larguraCelula - 10, height: 160)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        listaViagens = listaComTodasViagens
-        
+        listaPacotes = listaComTodosPacotes
         if searchText != "" {
-            let filtroListaViagem = NSPredicate(format: "titulo contains %@", searchText)
-            let listaFiltrada: Array<Viagem> = (listaViagens as NSArray).filtered(using: filtroListaViagem) as! Array
-            listaViagens = listaFiltrada
+            let filtroListaPacote = NSPredicate(format: "titulo contains[c] %@", searchText)
+            let listaFiltrada: Array<PacoteViagem> = (listaPacotes as NSArray).filtered(using: filtroListaPacote) as! Array
+            listaPacotes = listaFiltrada
         }
         self.labelContadorPacotes.text = self.atualizaContadorLabel()
-        coloecaoPacotesViagem.reloadData()
+        colecaoPacotesViagem.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let pacote = listaPacotes[indexPath.item]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "detalhes") as! DetalhesViagensViewController
+        controller.pacoteSelecionado = pacote
+        self.present(controller, animated: true, completion: nil)
     }
     
     func atualizaContadorLabel() -> String {
-        return listaViagens.count == 1 ? "1 pacote encontrado" : "\(listaViagens.count) pacotes encontrados"
+        return listaPacotes.count == 1 ? "1 pacote encontrado" : "\(listaPacotes.count) pacotes encontrados"
     }
     
 }
