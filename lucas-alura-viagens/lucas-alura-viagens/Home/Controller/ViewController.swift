@@ -36,14 +36,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         let viagemAtual = listaViagens[indexPath.row]
-
-        cell.labelTitulo.text  = viagemAtual.titulo
-        cell.labelQuantidadeDias.text = "\(viagemAtual.quantidadeDeDias) dias"
-        cell.labelPreco.text = "R$ \(viagemAtual.preco)"
-        cell.imagemViagem.image = UIImage(named: viagemAtual.caminhoDaImagem)
-        
-        cell.imagemViagem.layer.cornerRadius = 10
-        cell.imagemViagem.layer.masksToBounds = true
+        cell.configuraCelula(viagem: viagemAtual)
         
         return cell
     }

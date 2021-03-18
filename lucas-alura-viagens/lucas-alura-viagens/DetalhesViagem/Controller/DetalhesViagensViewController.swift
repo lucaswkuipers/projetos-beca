@@ -44,7 +44,9 @@ class DetalhesViagensViewController: UIViewController {
     
     
     @IBAction func botaoVoltar(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        guard let navigation = self.navigationController else { return }
+        navigation.popToRootViewController(animated: true)
     }
     
     var pacoteSelecionado:PacoteViagem? = nil

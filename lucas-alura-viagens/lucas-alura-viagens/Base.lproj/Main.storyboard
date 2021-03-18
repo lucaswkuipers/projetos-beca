@@ -386,10 +386,12 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFL-g4-IA0">
-                                <rect key="frame" x="10" y="49" width="25" height="25"/>
+                                <rect key="frame" x="10" y="49" width="50" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="TWS-53-Fcg"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="e3X-Vp-el6"/>
+                                    <constraint firstAttribute="width" constant="50" id="fyz-DD-iNy"/>
                                 </constraints>
                                 <state key="normal" image="icon_back.png">
                                     <color key="titleColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -677,7 +679,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="PuF-w3-zPi" firstAttribute="trailing" secondItem="gFL-g4-IA0" secondAttribute="trailing" constant="340" id="7aV-kX-RAY"/>
+                            <constraint firstItem="Fcy-Ny-lvT" firstAttribute="leading" secondItem="gFL-g4-IA0" secondAttribute="trailing" constant="-60" id="4wU-eE-CWs"/>
                             <constraint firstItem="vov-2E-z6d" firstAttribute="top" secondItem="Fcy-Ny-lvT" secondAttribute="bottom" constant="8" id="Ay7-vC-RK2"/>
                             <constraint firstItem="Fcy-Ny-lvT" firstAttribute="trailing" secondItem="PuF-w3-zPi" secondAttribute="trailing" id="Uqb-2r-cwP"/>
                             <constraint firstItem="vov-2E-z6d" firstAttribute="bottom" secondItem="PuF-w3-zPi" secondAttribute="bottom" id="W0O-4o-aTS"/>
