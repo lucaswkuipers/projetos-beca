@@ -57,7 +57,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         listaPacotes = listaComTodosPacotes
         if searchText != "" {
-            let filtroListaPacote = NSPredicate(format: "titulo contains[c] %@", searchText)
+            let filtroListaPacote = NSPredicate(format: "viagem.titulo contains [cd] %@", searchText)
             let listaFiltrada: Array<PacoteViagem> = (listaPacotes as NSArray).filtered(using: filtroListaPacote) as! Array
             listaPacotes = listaFiltrada
         }
