@@ -34,6 +34,13 @@ class DetalhesViagensViewController: UIViewController {
     }
     
     
+    @IBAction func botaoFinalizarCompra(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "confirmacaoPagamento") as! ConfirmacaoPagamentoViewController
+        
+        controller.pacoteComprado = pacoteSelecionado
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
     
     
     @IBAction func botaoVoltar(_ sender: UIButton) {
